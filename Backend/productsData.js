@@ -1,0 +1,23 @@
+const products = [
+    {
+        id:1,
+        categoryid:1,
+        name:"apple"
+    },
+    {
+        id:2,
+        categoryid:1,
+        name:"banana"    
+    },
+    {
+        id:3,
+        categoryid:2,
+        name:"carrot"
+    },
+    {
+        id:4,
+        categoryid:2,
+        name:"veg"
+    }
+]
+module.exports=products;
