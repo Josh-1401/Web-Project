@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <style>
+            header{
+            background: url(/imgs/groceries.jpg);
+            background-size: cover;
+            background-position:center ;
+            min-height: 1000px;
+        }
+        .image-with-text {
+            display: flex!important;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"]::placeholder {
+          color: black; /* Change this color to the desired placeholder color */
+      }
+        
+        @media screen and (max-width:670px){
+            header{
+                min-height: 500px;
+            }
+            
+        }
+        </style>
+    </head>
+<body><header>
+    <nav class="nav-wrapper ">
+        <div class="container">
+            <a href="#" class="brand-logo " ><%= title %></a>
+            <a href="#" data-target="mobile-links" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class ="right hide-on-med-and-down">
+            <li><a href="/home"class="btn">Home</a></li>
+            <li><a href="/logout"class="btn">Logout</a></li>
+        </ul>     
+        <ul class="sidenav" id="mobile-links"><li>
+            <li><a href="/home"class="btn">Home</a></li>
+            <li><a href="/logout"class="btn">Logout</a></li>
+            </ul>  
+     </div>
+</nav><br>
+  <% if (reviews && reviews.length > 0) { %>
+    <h2>Existing Reviews:</h2>
+    <ul>
+      <% reviews.forEach(function(review) { %>
+        <li><%= review.review %></li>
+        <% if(isAdmin) { %>
+          <form action="/categories/<%= categoryid %>/products/<%= review.prodid %>/reviews/<%= review.id %>/?_method=PUT" method="POST" >
+              <input type="hidden" name="_method" value="PUT">
+              <input type="text" name="name" placeholder="Edit Review" required style="color:black"><br>
+              <button type="submit" class="btn waves-effect waves-light">Edit</button>
+          </form>
+          <br>
+          <form action="/categories/<%= categoryid %>/products/<%= review.prodid %>/reviews/<%= review.id %>/?_method=DELETE" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn waves-effect waves-light">Delete</button>
+          </form>
+          <% } %>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No reviews available.</p>
+  <% } %>
+
+  <h2>Add a Review</h2>
+  <form action="/categories/<%= categoryid %>/products/<%= prodid %>/reviews" method="post">
+    <label for="review"style="color:black">Review:</label>
+    <textarea id="review" name="review" rows="4" cols="50"></textarea><br><br>
+    <input type="submit" class="btn" value="Submit Review">
+  </form>
+  </header>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <style>
+            header{
+            background-size: cover;
+            background-position:center ;
+            /*min-height: 1000px;*/
+        }
+        .image-with-text {
+            display: flex!important;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        @media screen and (max-width:670px){
+            header{
+                min-height: 500px;
+            }
+            
+        }
+        </style>
+    </head>
+    <body>
+        
+        <header>
+            <nav class="nav-wrapper ">
+                <div class="container">
+                <a href="#" class="brand-logo " ><%= title %></a>
+                <a href="#" data-target="mobile-links" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class ="right hide-on-med-and-down">
+                
+                <li><a href="#"class="btn">Welcome <%= user %></a></li>
+                <li><a href="/logout"class="btn">Logout</a></li>
+
+            </ul>     
+            <ul class="sidenav" id="mobile-links">
+                <li><a href="#"class="btn">Welcome <%= user %></a></li>
+
+                <li><a href="/logout"class="btn">Logout</a></li>
+
+                </ul>  
+         </div>
+        </nav>
+        <% if(!isAdmin) { %>
+            <div class="parallax-container">
+                <div class="parallax"><img src="imgs/groceries.jpg"></div>
+            </div>
+            <div class="section red">
+                <div class="row container">
+                    <h2 class="header">ABOUT</h2>
+                    <p class="grey-text text-darken-3 lighten-3">A website to browse groceries and daily essentials.</p>
+                    <a href="/categories" class="btn waves-effect waves-light red">Click to view various Categories</a>
+                </div>
+            </div>
+            <div class="parallax-container">
+                <div class="parallax"><img src="imgs/groceries.jpg"></div>
+            </div>
+        <% } else { %>
+            <div class="parallax-container">
+                <div class="parallax"><img src="imgs/groceries.jpg"></div>
+            </div>
+            <div class="section red">
+                <div class="row container">
+                    <h2 class="header">Admin Page</h2>
+                    <p class="grey-text text-darken-3 lighten-3"></p>
+                    <a href="/categories" class="btn waves-effect waves-light red">Categories</a>
+                </div>
+            </div>
+            <div class="parallax-container">
+                <div class="parallax"><img src="imgs/groceries.jpg"></div>
+            </div>
+        <% }
+        %>
+            
+        </header>
+        
+    </body>
+    <script src="/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> $(document).ready(function(){ $('.sidenav').sidenav(); })</script>
+    <script> $(document).ready(function(){$('.parallax').parallax();});</script>
+</html>

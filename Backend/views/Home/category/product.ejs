@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <style>
+            header{
+            background: url(/imgs/groceries.jpg);
+            background-size: cover;
+            background-position:center ;
+            min-height: 1000px;
+        }
+        .image-with-text {
+            display: flex!important;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"]::placeholder {
+            color: black; /* Change this color to the desired placeholder color */
+        }
+        .col-centered {
+            display: flex;
+            flex-direction: column!important;
+            justify-content: center!important;
+            align-items: center!important;
+            text-align: center!important;
+            margin: 0 auto!important;
+        }
+        @media screen and (max-width:670px){
+            header{
+                min-height: 500px;
+            }
+            
+        }
+        </style>
+    </head>
+    <body>
+        
+        <header>
+            <nav class="nav-wrapper ">
+                <div class="container">
+                <a href="#" class="brand-logo " ><%= title %></a>
+                <a href="#" data-target="mobile-links" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class ="right hide-on-med-and-down">
+                <li><a href="/home"class="btn">Home</a></li>
+                <li><a href="/logout"class="btn">Logout</a></li>
+            </ul>     
+            <ul class="sidenav" id="mobile-links"><li>
+                <li><a href="/home"class="btn">Home</a></li>
+                <li><a href="/logout"class="btn">Logout</a></li>
+                </ul>  
+         </div>
+        </nav><br>
+        <div class="row ">
+            <div class="col s6  push-s4 left">
+            <% product.forEach(prod => { %>
+                <a href="/categories/<%= prod.categoryid %>/products/<%= prod.id %>/reviews" style=" display: inline-block;margin: 25px;text-align: center;color:black";>
+                    <img src="/imgs/<%= prod.image %>" alt="<%= prod.name %>" height="200px" width="250px"><br>
+                    <h4 class="btn"><b>See Reviews</b></h4></a>
+                        
+                <%});%>
+
+            </div>
+        </div>
+        </header>
+        
+    </body>
+    <script src="/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> $(document).ready(function(){ $('.sidenav').sidenav(); })</script>
+    <script> $(document).ready(function(){$('.parallax').parallax();});</script>
+</html>

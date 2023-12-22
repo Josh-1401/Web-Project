@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <style>
+            header{
+            background: url(imgs/groceries.jpg);
+            background-size: cover;
+            background-position:center ;
+            min-height: 1000px;
+        }
+        .image-with-text {
+            display: flex!important;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"]::placeholder {
+            color: black; /* Change this color to the desired placeholder color */
+        }
+        
+        @media screen and (max-width:670px){
+            header{
+                min-height: 500px;
+            }
+            
+        }
+        </style>
+    </head>
+    <body>
+        
+        <header>
+            <nav class="nav-wrapper ">
+                <div class="container">
+                    <a href="#" class="brand-logo " ><%= title %></a>
+                    <a href="#" data-target="mobile-links" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class ="right hide-on-med-and-down">
+                    <li><a href="/home"class="btn">Home</a></li>
+                    <li><a href="/logout"class="btn">Logout</a></li>
+                </ul>     
+                <ul class="sidenav" id="mobile-links"><li>
+                    <li><a href="/home"class="btn">Home</a></li>
+                    <li><a href="/logout"class="btn">Logout</a></li>
+                    </ul>  
+             </div>
+         </div>
+        </nav><br>
+        <div  class="row center-align"  >
+            <div class="col s4" >
+            <% categories.forEach(category => { %>
+                <a href="/categories/<%= category.Categoryid %>/products" style="display: inline-block;margin: 25px;text-align: center; color: black";>
+                    <img src="/imgs/<%= category.image %>" alt="<%= category.name %>" height="200px" width="250px"><br>
+                    <h5 ><b><%= category.name %></h5></a>
+                        <% if(isAdmin) { %>
+                        <form action="/categories/<%= category.Categoryid %>/?_method=PUT" method="POST" >
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="text" name="name" placeholder="New Category Name" required style="color:black"><br>
+                            <input type="text" name="image" placeholder="New Image URL" required><br>
+                            <button type="submit" class="btn waves-effect waves-light">Edit Category</button>
+                        </form>
+                        <br>
+                        <form action="/categories/<%= category.Categoryid %>/?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn waves-effect waves-light">Delete Category</button>
+                        </form>
+                        <% } %>
+                <%});%>
+                <% if(isAdmin) { %>
+                <form action="/categories" method="POST">
+                    <input type="text" name="name" placeholder="Category Name" required><br>
+                    <input type="text" name="image" placeholder="Image URL" required><br>
+                    <button type="submit" class="btn waves-effect waves-light">Create Category</button>
+                </form>
+                <% } %>
+                </div>
+            </div>
+            
+                </header>
+        
+    </body>
+    <script src="/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script> $(document).ready(function(){ $('.sidenav').sidenav(); })</script>
+    <script> $(document).ready(function(){$('.parallax').parallax();});</script>
+</html>
